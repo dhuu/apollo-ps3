@@ -626,12 +626,11 @@ s32 main(s32 argc, const char* argv[])
 	LoadSounds();
 
 	initLocalization();
-	// Unpack application data on first run
-	if (file_exists(APOLLO_LOCAL_CACHE "appdata.zip") == SUCCESS)
-	{
-//		clean_directory(APOLLO_DATA_PATH, "");
-		unzip_app_data(APOLLO_LOCAL_CACHE "appdata.zip");
-	}
+	// Unpack application data disabled (not needed for simple activation tool)
+	// if (file_exists(APOLLO_LOCAL_CACHE "appdata.zip") == SUCCESS)
+	// {
+	// 	unzip_app_data(APOLLO_LOCAL_CACHE "appdata.zip");
+	// }
 
 	// Splash screen logo (fade-in)
 	drawSplashLogo(1);
