@@ -751,7 +751,7 @@ static void resignPSVfile(const char* psv_path)
 	show_message(_("File successfully resigned!"));
 }
 
-static void activateAccount(const char* ex_path)
+void activateAccount(const char* ex_path)
 {
 	int ret;
 	char path[256];

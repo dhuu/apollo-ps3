@@ -657,36 +657,17 @@ s32 main(s32 argc, const char* argv[])
 	// Splash screen logo (fade-out)
 	drawSplashLogo(-1);
 
-	SND_SetVoice(2, VOICE_STEREO_16BIT, SAMPLING_FREQ, 0, background_music[0], AUDIO_SAMPLES, MAX_VOLUME, MAX_VOLUME, xmp_audio_callback);
-	SND_Pause(!apollo_config.music);
+	extern void activateAccount(const char* ex_path);
+	char ex_path[128];
 	
-	//Set options
+	// No music needed
+	// Set options
 	update_callback(!apollo_config.update);
 
-	Draw_MainMenu_Ani();
+	snprintf(ex_path, sizeof(ex_path), EXDATA_PATH_HDD, apollo_config.user_id);
 	
-	while (!close_app)
-	{       
-		tiny3d_Clear(0xff000000, TINY3D_CLEAR_ALL);
-
-		// Enable alpha Test
-		tiny3d_AlphaTest(1, 0x10, TINY3D_ALPHA_FUNC_GEQUAL);
-
-		// Enable alpha blending.
-		tiny3d_BlendFunc(1, TINY3D_BLEND_FUNC_SRC_RGB_SRC_ALPHA | TINY3D_BLEND_FUNC_SRC_ALPHA_SRC_ALPHA,
-			TINY3D_BLEND_FUNC_SRC_ALPHA_ONE_MINUS_SRC_ALPHA | TINY3D_BLEND_FUNC_SRC_RGB_ONE_MINUS_SRC_ALPHA,
-			TINY3D_BLEND_RGB_FUNC_ADD | TINY3D_BLEND_ALPHA_FUNC_ADD);
-		
-		// change to 2D context (remember you it works with 848 x 512 as virtual coordinates)
-		tiny3d_Project2D();
-
-		drawScene();
-
-		//Draw help
-		if (menu_id)
-			helpFooter();
-		
-		tiny3d_Flip();
+	if (show_dialog(DIALOG_TYPE_YESNO, "Deseja prosseguir com a ativacao da conta? (Sim para prosseguir e Nao para cancelar)")) {
+		activateAccount(ex_path);
 	}
 
 	release_all();
