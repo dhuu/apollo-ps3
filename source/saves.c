@@ -1010,94 +1010,12 @@ int ReadOnlineSaves(save_entry_t * game)
 
 list_t * ReadBackupList(const char* userPath)
 {
-	char tmp[128];
 	save_entry_t * item;
-	code_entry_t * cmd;
 	list_t *list = list_alloc();
-
-	item = _createSaveEntry(SAVE_FLAG_PS3, CHAR_ICON_COPY " ", _("Export Licenses"));
-	asprintf(&item->path, EXDATA_PATH_HDD, apollo_config.user_id);
-	item->title_id = strdup("HDD");
-	item->type = FILE_TYPE_RIF;
-	list_append(list, item);
 
 	item = _createSaveEntry(SAVE_FLAG_PS3, CHAR_ICON_USER " ", _("Activate PS3 Account"));
 	asprintf(&item->path, EXDATA_PATH_HDD, apollo_config.user_id);
 	item->type = FILE_TYPE_ACT;
-	list_append(list, item);
-
-	for (int i = 0; i < MAX_USB_DEVICES; i++)
-	{
-		snprintf(tmp, sizeof(tmp), USB_PATH, i);
-		if (i && dir_exists(tmp) != SUCCESS)
-			continue;
-
-		item = _createSaveEntry(SAVE_FLAG_PS3, CHAR_ICON_COPY " ", _("Import Licenses"));
-		asprintf(&item->path, IMPORT_RAP_PATH_USB, i);
-		asprintf(&item->title_id, "USB %d", i);
-		item->type = FILE_TYPE_RAP;
-		list_append(list, item);
-
-		item = _createSaveEntry(SAVE_FLAG_PS2, CHAR_ICON_COPY " ", _("PS2 Classics: Import & Encrypt ISOs"));
-		asprintf(&item->path, PS2ISO_PATH_USB, i);
-		asprintf(&item->title_id, "USB %d", i);
-		item->type = FILE_TYPE_ISO;
-		list_append(list, item);
-
-		item = _createSaveEntry(SAVE_FLAG_PS2, CHAR_ICON_COPY " ", _("Import PS2 raw memory cards"));
-		asprintf(&item->path, IMP_PS2VMC_PATH_USB, i);
-		asprintf(&item->title_id, "USB %d", i);
-		item->type = FILE_TYPE_PS2RAW;
-		list_append(list, item);
-
-		item = _createSaveEntry(SAVE_FLAG_PS1, CHAR_ICON_COPY " ", _("Convert PS1 saves to .PSV format"));
-		asprintf(&item->path, USB_PATH, i);
-		asprintf(&item->title_id, "USB %d", i);
-		item->type = FILE_TYPE_PS1;
-		list_append(list, item);
-
-		item = _createSaveEntry(SAVE_FLAG_PS2, CHAR_ICON_COPY " ", _("Convert PS2 saves to .PSV format"));
-		asprintf(&item->path, USB_PATH, i);
-		asprintf(&item->title_id, "USB %d", i);
-		item->type = FILE_TYPE_PS2;
-		list_append(list, item);
-
-		item = _createSaveEntry(SAVE_FLAG_PS2, CHAR_ICON_COPY " ", _("Convert/Resign .PSV saves"));
-		asprintf(&item->path, USB_PATH, i);
-		asprintf(&item->title_id, "USB %d", i);
-		item->type = FILE_TYPE_PSV;
-		list_append(list, item);
-	}
-
-	item = _createSaveEntry(SAVE_FLAG_PS2, CHAR_ICON_COPY " ", _("PS2 Classics: Import & Encrypt ISOs"));
-	item->path = strdup(PS2ISO_PATH_HDD);
-	item->title_id = strdup("HDD");
-	item->type = FILE_TYPE_ISO;
-	list_append(list, item);
-
-	item = _createSaveEntry(SAVE_FLAG_PS2, CHAR_ICON_COPY " ", _("PS2 Classics: Export & Decrypt BIN.ENC images"));
-	item->path = strdup(PS2ISO_PATH_HDD);
-	item->title_id = strdup("HDD");
-	item->type = FILE_TYPE_BINENC;
-	list_append(list, item);
-
-	item = _createSaveEntry(SAVE_FLAG_PS3, CHAR_ICON_COPY " ", _("Export /dev_flash2"));
-	item->path = strdup("/dev_flash2/");
-	item->codes = list_alloc();
-	cmd = _createCmdCode(PATCH_COMMAND, CHAR_ICON_ZIP " ", _("Backup /dev_flash2 to USB"), CMD_CODE_NULL);
-	_createOptions(cmd, _("Save dev_flash2.zip to USB"), CMD_EXP_FLASH2_USB);
-	list_append(item->codes, cmd);
-	list_append(list, item);
-
-	item = _createSaveEntry(0, CHAR_ICON_ZIP " ", _("Extract Archives (RAR, Zip, 7z)"));
-	item->path = strdup(PS3_TMP_PATH);
-	item->title_id = strdup("HDD");
-	item->type = FILE_TYPE_ZIP;
-	list_append(list, item);
-
-	item = _createSaveEntry(0, CHAR_ICON_NET " ", _("Network Tools (Downloader, Web Server)"));
-	item->path = strdup(PS3_TMP_PATH);
-	item->type = FILE_TYPE_NET;
 	list_append(list, item);
 
 	return list;

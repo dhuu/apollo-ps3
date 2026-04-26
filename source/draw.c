@@ -368,14 +368,8 @@ void drawColumns(uint8_t alpha)
 {
 //	DrawTexture(&menu_textures[bg_water_png_index], bg_water_png_x - apollo_config.marginH, bg_water_png_y, 0, bg_water_png_w + (apollo_config.marginH * 2), bg_water_png_h, 0xffffff00 | 0xFF);
 
-	//Columns
-	_drawColumn(column_1_png_index, column_1_png_x, column_1_png_y, alpha);
-	_drawColumn(column_2_png_index, column_2_png_x, column_2_png_y, alpha);
-	_drawColumn(column_3_png_index, column_3_png_x, column_3_png_y, alpha);
-	_drawColumn(column_4_png_index, column_4_png_x, column_4_png_y, alpha);
+	//Columns - keep only column 5 (User Backup)
 	_drawColumn(column_5_png_index, column_5_png_x, column_5_png_y, alpha);
-	_drawColumn(column_6_png_index, column_6_png_x, column_6_png_y, alpha);
-	_drawColumn(column_7_png_index, column_7_png_x, column_7_png_y, alpha);
 }
 
 void drawJars(uint8_t alpha)
@@ -384,26 +378,8 @@ void drawJars(uint8_t alpha)
 	SetFontSize(APP_FONT_SIZE_MENU);
 	SetCurrentFont(font_adonais_regular);
 
-	//Trophies
-	drawJar(jar_trophy_png_index, jar_empty_png_x, jar_empty_png_y, (alpha == 0xFF ? "Trophies" : ""), alpha);
-
-	//USB save
-	drawJar(jar_usb_png_index, jar_usb_png_x, jar_usb_png_y, (alpha == 0xFF ? "USB Saves" : ""), alpha);
-	
-	//HDD save
-	drawJar(jar_hdd_png_index, jar_hdd_png_x, jar_hdd_png_y, (alpha == 0xFF ? "HDD Saves" : ""), alpha);
-
-	//Online cheats
-	drawJar(jar_db_png_index, jar_db_png_x, jar_db_png_y, (alpha == 0xFF ? (apollo_config.online_opt ? "FTP Server" : "Online DB") : ""), alpha);
-	
-	//User Backup
-	drawJar(jar_bup_png_index, jar_bup_png_x, jar_bup_png_y, (alpha == 0xFF ? "User Tools" : ""), alpha);
-
-	//Options
-	drawJar(jar_opt_png_index, jar_opt_png_x, jar_opt_png_y, (alpha == 0xFF ? "Settings" : ""), alpha);
-	
-	//About
-	drawJar(jar_about_png_index, jar_about_png_x, jar_about_png_y, (alpha == 0xFF ? "About" : ""), alpha);
+	//User Backup (Renamed to Ativar Conta)
+	drawJar(jar_bup_png_index, jar_bup_png_x, jar_bup_png_y, (alpha == 0xFF ? "Ativar Conta" : ""), alpha);
 
 	SetFontAlign(FONT_ALIGN_LEFT);
 }
