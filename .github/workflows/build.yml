@@ -70,7 +70,6 @@ jobs:
 
     - name: Build Apollo App Package
       run: |
-        make createzip
         make pkg
 
     - name: Push package artifact
