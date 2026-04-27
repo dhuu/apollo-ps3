@@ -27,19 +27,7 @@
 #include "font_adonais.h"
 #include "font-10x20.h"
 
-//Sound
-#include "spu_soundmodule_bin.h"
-#include <soundlib/spu_soundlib.h>
-#include <libxmp-lite/xmp.h>
-
-#define SAMPLING_FREQ       48000 /* 48khz. */
-#define AUDIO_SAMPLES       SAMPLING_FREQ * 2 /* audio buffer to decode (for 48000 samples x 0.5 seconds and 16 bit stereo as reference) */
-
-extern const uint8_t haiku_s3m[];
-extern const uint32_t haiku_s3m_size;
-
-static short *background_music[2] = {NULL, NULL};
-static xmp_context xmp = NULL;
+// Sound removed
 
 // SPU
 static u32 inited;
@@ -335,74 +323,16 @@ static void LoadTextures_Menu(void)
 //	TTFUnloadFont();
 
 	//Init Main Menu textures
-	load_menu_texture(leon_luna, jpg);
 	load_menu_texture(bgimg, jpg);
-	load_menu_texture(cheat, png);
-
 	load_menu_texture(circle_loading_bg, png);
 	load_menu_texture(circle_loading_seek, png);
 	load_menu_texture(edit_shadow, png);
-
 	load_menu_texture(footer_ico_circle, png);
 	load_menu_texture(footer_ico_cross, png);
 	load_menu_texture(footer_ico_square, png);
 	load_menu_texture(footer_ico_triangle, png);
-	load_menu_texture(header_dot, png);
-	load_menu_texture(header_line, png);
-
-	load_menu_texture(mark_arrow, png);
-	load_menu_texture(mark_line, png);
-	load_menu_texture(opt_off, png);
-	load_menu_texture(opt_on, png);
-	load_menu_texture(scroll_bg, png);
-	load_menu_texture(scroll_lock, png);
-	load_menu_texture(help, png);
 	load_menu_texture(buk_scr, png);
-	load_menu_texture(cat_about, png);
-	load_menu_texture(cat_cheats, png);
-	load_menu_texture(cat_opt, png);
-	load_menu_texture(cat_usb, png);
-	load_menu_texture(cat_bup, png);
-	load_menu_texture(cat_db, png);
-	load_menu_texture(cat_hdd, png);
-	load_menu_texture(cat_sav, png);
-	load_menu_texture(cat_warning, png);
-	load_menu_texture(column_1, png);
-	load_menu_texture(column_2, png);
-	load_menu_texture(column_3, png);
-	load_menu_texture(column_4, png);
-	load_menu_texture(column_5, png);
-	load_menu_texture(column_6, png);
-	load_menu_texture(column_7, png);
-	load_menu_texture(jar_about, png);
-	load_menu_texture(jar_about_hover, png);
-	load_menu_texture(jar_bup, png);
-	load_menu_texture(jar_bup_hover, png);
-	load_menu_texture(jar_db, png);
-	load_menu_texture(jar_db_hover, png);
-	load_menu_texture(jar_trophy, png);
-	load_menu_texture(jar_trophy_hover, png);
-	load_menu_texture(jar_hdd, png);
-	load_menu_texture(jar_hdd_hover, png);
-	load_menu_texture(jar_opt, png);
-	load_menu_texture(jar_opt_hover, png);
-	load_menu_texture(jar_usb, png);
-	load_menu_texture(jar_usb_hover, png);
 	load_menu_texture(logo, png);
-	load_menu_texture(logo_text, png);
-	load_menu_texture(tag_lock, png);
-	load_menu_texture(tag_own, png);
-	load_menu_texture(tag_vmc, png);
-	load_menu_texture(tag_ps1, png);
-	load_menu_texture(tag_ps2, png);
-	load_menu_texture(tag_ps3, png);
-	load_menu_texture(tag_psp, png);
-	load_menu_texture(tag_psv, png);
-	load_menu_texture(tag_warning, png);
-	load_menu_texture(tag_net, png);
-	load_menu_texture(tag_zip, png);
-	load_menu_texture(tag_apply, png);
-	load_menu_texture(tag_transfer, png);
 
 	u8* imagefont;
 	if (read_buffer("/dev_flash/vsh/resource/imagefont.bin", &imagefont, NULL) == SUCCESS)
