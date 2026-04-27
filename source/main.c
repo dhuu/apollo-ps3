@@ -12,6 +12,9 @@
 #include <dirent.h>
 #include <mini18n.h>
 
+#include <sysmodule/sysmodule.h>
+#include <sysutil/sysutil.h>
+
 #include "saves.h"
 #include "pfd.h"
 #include "util.h"
@@ -238,20 +241,6 @@ static void release_all(void)
 	if(inited & INITED_CALLBACK)
 		sysUtilUnregisterCallback(SYSUTIL_EVENT_SLOT0);
 
-	if(inited & INITED_SOUNDLIB)
-		SND_End();
-
-	if(inited & INITED_AUDIOPLAYER) {
-		xmp_end_player(xmp);
-		xmp_release_module(xmp);
-		xmp_free_context(xmp);
-	}
-
-	if(inited & INITED_SPU) {
-		sysSpuRawDestroy(spu);
-		sysSpuImageClose(&spu_image);
-	}
-
 	http_end();
 	mini18n_close();
 	wait_save_thread();
@@ -361,64 +350,7 @@ static void LoadTextures_Menu(void)
 	LOG("LoadTextures_Menu() :: Allocated %db (%.02fkb, %.02fmb) for textures", tBytes, tBytes / (float)1024, tBytes / (float)(1024 * 1024));
 }
 
-static void xmp_audio_callback(int voice)
-{
-	static int music_buffer = 0;
-
-	music_buffer ^= 1;
-	xmp_play_buffer(xmp, background_music[music_buffer], AUDIO_SAMPLES, 0);
-	SND_AddVoice(voice, background_music[music_buffer], AUDIO_SAMPLES);
-}
-
-static void LoadSounds(void)
-{
-	//Initialize SPU
-	u32 entry = 0;
-	u32 segmentcount = 0;
-	sysSpuSegment* segments;
-	
-	sysSpuInitialize(6, 5);
-	sysSpuRawCreate(&spu, NULL);
-	sysSpuElfGetInformation(spu_soundmodule_bin, &entry, &segmentcount);
-	
-	size_t segmentsize = sizeof(sysSpuSegment) * segmentcount;
-	segments = (sysSpuSegment*)memalign(128, SPU_SIZE(segmentsize)); // must be aligned to 128 or it break malloc() allocations
-	memset(segments, 0, segmentsize);
-
-	sysSpuElfGetSegments(spu_soundmodule_bin, segments, segmentcount);
-	sysSpuImageImport(&spu_image, spu_soundmodule_bin, 0);
-	sysSpuRawImageLoad(spu, &spu_image);
-	
-	inited |= INITED_SPU;
-	if(SND_Init(spu)==0)
-		inited |= INITED_SOUNDLIB;
-	
-	// decode the mp3 effect file included to memory. It stops by EOF or when samples exceed size_effects_samples
-	xmp = xmp_create_context();
-
-	// Decode a s3m file to play
-	if (xmp_load_module_from_memory(xmp, (void*) haiku_s3m, haiku_s3m_size) < 0)
-	{
-		LOG("[ERROR] Failed to decode audio file");
-		return;
-	}
-
-	xmp_set_player(xmp, XMP_PLAYER_VOLUME, 100);
-	xmp_set_player(xmp, XMP_PLAYER_INTERP, XMP_INTERP_SPLINE);
-	xmp_start_player(xmp, SAMPLING_FREQ, 0);
-
-	// Calculate the sample count and allocate a buffer for the sample data accordingly
-	// adjust the sound buffer sample correctly to the background_music_size
-	// SPU dma works aligned to 128 bytes. SPU module is designed to read unaligned buffers and it is better thing aligned buffers)
-	background_music[0] = (short *)memalign(128, SPU_SIZE(AUDIO_SAMPLES));
-	background_music[1] = (short *)memalign(128, SPU_SIZE(AUDIO_SAMPLES));
-
-	// Decode the audio into pSampleData
-	if (xmp_play_buffer(xmp, background_music[0], AUDIO_SAMPLES, 0) == SUCCESS)
-		inited |= INITED_AUDIOPLAYER;
-
-	SND_Pause(1);
-}
+// Sound functions removed
 
 void update_usb_path(char* path)
 {
