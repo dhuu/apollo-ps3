@@ -536,7 +536,9 @@ void drawDialogBackground(void)
 	tiny3d_Project2D();
 
 	DrawBackgroundTexture(0, 0xFF);
-	DrawTexture(&menu_textures[help_png_index], help_png_x, help_png_y + 50, 0, help_png_w, help_png_h - 100, 0xFFFFFF00 | 0xFF);
+	
+	// Draw the logo instead of the deleted help.png
+	DrawTextureCenteredX(&menu_textures[logo_png_index], 424, 150, 0, logo_png_w, logo_png_h, 0xffffffff);
 
 	tiny3d_Flip();
 }

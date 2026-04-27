@@ -497,8 +497,7 @@ s32 main(s32 argc, const char* argv[])
 	registerSpecialChars();
 	initMenuOptions();
 
-	// Splash screen logo (fade-out)
-	drawSplashLogo(-1);
+	// Splash screen logo (fade-out) removed to keep background
 
 	extern void activateAccount(const char* ex_path);
 	char ex_path[128];
