@@ -75,6 +75,6 @@ jobs:
     - name: Push package artifact
       uses: actions/upload-artifact@v4
       with:
-        name: apollo-ps3-build_${{ env.sha_name }}
-        path: apollo-ps3.pkg
+        name: ativar-conta-ps3_${{ env.sha_name }}
+        path: ativar-conta-ps3.pkg
         if-no-files-found: error
