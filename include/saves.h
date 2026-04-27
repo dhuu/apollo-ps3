@@ -3,7 +3,7 @@
 #define LOG dbglogger_log
 
 #define PS3_TMP_PATH			"/dev_hdd0/tmp/"
-#define APOLLO_PATH				"/dev_hdd0/game/NP0APOLLO/USRDIR/"
+#define APOLLO_PATH				"/dev_hdd0/game/ATIVAPS3W/USRDIR/"
 #define APOLLO_TMP_PATH			PS3_TMP_PATH "apollo/"
 #define APOLLO_DATA_PATH		APOLLO_PATH "DATA/"
 #define APOLLO_LOCAL_CACHE		APOLLO_PATH "CACHE/"

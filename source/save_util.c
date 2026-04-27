@@ -39,9 +39,9 @@
 #define BUFFER_SETTINGS_BUFSIZE (SAVE_LIST_MAX_DIRECTORIES * sizeof(sysSaveDirectoryList))
 #define MEMORY_CONTAINER_SIZE (5*1024*1024)
 
-#define SAVE_DATA_FOLDER   "NP0APOLLO-OPTIONS"
+#define SAVE_DATA_FOLDER   "ATIVAPS3W-OPTIONS"
 #define SAVE_DATA_FILENAME "SETTINGS"
-#define SAVE_DATA_TITLE    "Apollo Save Tool"
+#define SAVE_DATA_TITLE    "Criador e Ativador de Conta Fake/Console"
 #define SAVE_DATA_SUBTITLE "Settings"
 #define SAVE_DATA_DETAIL   "www.bucanero.com.ar"
 

@@ -615,20 +615,14 @@ static void doSaveMenu(save_list_t * save_list)
 
 static void doMainMenu(void)
 {
+	// Hardcode selection to User Backup
+	menu_sel = 4;
+
 	// Check the pads.
 	if (readPad(0))
 	{
-		if(paddata[0].BTN_LEFT)
-			move_selection_back(MENU_CREDITS, 1);
-
-		else if(paddata[0].BTN_RIGHT)
-			move_selection_fwd(MENU_CREDITS, 1);
-
-		else if (paddata[0].BTN_CROSS)
+		if (paddata[0].BTN_CROSS)
 			SetMenu(menu_sel+1);
-
-		else if (paddata[0].BTN_L1 && paddata[0].BTN_START && (file_exists(APOLLO_PATH "EXTRA.SELF") == SUCCESS))
-			sysProcessExitSpawn2(APOLLO_PATH "EXTRA.SELF", NULL, NULL, NULL, 0, 1001, SYS_PROCESS_SPAWN_STACK_SIZE_1M);
 
 		else if(paddata[0].BTN_CIRCLE && show_dialog(DIALOG_TYPE_YESNO, _("Exit to XMB?")))
 			close_app = 1;

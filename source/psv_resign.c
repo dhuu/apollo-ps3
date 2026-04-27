@@ -210,7 +210,7 @@ void get_psv_filename(char* psvName, const char* path, const char* dirName)
 
 	if (!path)
 	{
-		strcpy(psvName, "/dev_hdd0/game/NP0APOLLO/USRDIR/CACHE/tmp.psv");
+		strcpy(psvName, "/dev_hdd0/game/ATIVAPS3W/USRDIR/CACHE/tmp.psv");
 		return;
 	}
 

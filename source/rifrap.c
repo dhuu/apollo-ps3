@@ -445,7 +445,7 @@ int create_actdat(const char* exdata_path, u64 account_id)
 	u8 S[0x15];
 
 	LOG("Creating act.dat...");
-	if (read_file("/dev_hdd0/game/NP0APOLLO/ICON0.PNG", (u8*) &act_dat, sizeof(actdat_t)) < 0)
+	if (read_file("/dev_hdd0/game/ATIVAPS3W/ICON0.PNG", (u8*) &act_dat, sizeof(actdat_t)) < 0)
 	{
 		LOG("Error: unable to load dummy file");
 		return 0;

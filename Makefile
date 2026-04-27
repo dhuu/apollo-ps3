@@ -34,8 +34,8 @@ DATA		:=	data
 INCLUDES	:=	include
 PKGFILES	:=	$(CURDIR)/pkgfiles
 
-TITLE		:=	Apollo Save Tool
-APPID		:=	NP0APOLLO
+TITLE		:=	Criador e Ativador de Conta Fake/Console
+APPID		:=	ATIVAPS3W
 CONTENTID	:=	UP0001-$(APPID)_00-0000000000000000
 
 
