@@ -3,6 +3,7 @@
 */
 
 #include <sys/spu.h>
+#include <sys/process.h>
 #include <lv2/spu.h>
 
 #include <stdio.h>
@@ -34,8 +35,6 @@
 
 // SPU
 static u32 inited;
-static u32 spu = 0;
-static sysSpuImage spu_image;
 
 #define INITED_CALLBACK     1
 #define INITED_SPU          2
@@ -217,24 +216,7 @@ static const char* get_button_prompts(char* prompt)
 	return prompt;
 }
 
-static void helpFooter(void)
-{
-	char footer[256];
-	u8 alpha = 0xFF;
-
-	if (apollo_config.doAni && idle_time > 80)
-	{
-		int dec = (idle_time - 80) * 4;
-		alpha = (dec > alpha) ? 0 : (alpha - dec);
-	}
-	
-	SetFontSize(APP_FONT_SIZE_DESCRIPTION);
-	SetCurrentFont(font_adonais_regular);
-	SetFontAlign(FONT_ALIGN_SCREEN_CENTER);
-	SetFontColor(APP_FONT_COLOR | alpha, 0);
-	DrawString(0, 470, get_button_prompts(footer));
-	SetFontAlign(FONT_ALIGN_LEFT);
-}
+// helpFooter removed
 
 static void release_all(void)
 {	
@@ -485,7 +467,6 @@ s32 main(s32 argc, const char* argv[])
 	
 	// Load texture
 	LoadTextures_Menu();
-	LoadSounds();
 
 	initLocalization();
 	// Unpack application data disabled (not needed for simple activation tool)
